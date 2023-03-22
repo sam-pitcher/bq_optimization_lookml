@@ -1,4 +1,4 @@
-connection: "sam-pitcher-playground"
+connection: "@{connection_name}"
 
 include: "/jobs/*.view.lkml"
 
