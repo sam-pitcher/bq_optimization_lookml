@@ -1,5 +1,3 @@
-connection: "@{connection_name}"
-
 include: "/jobs/*.view.lkml"
 
 include: "/dashboards/*.dashboard"
