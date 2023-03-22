@@ -48,9 +48,10 @@
       Slug: history.slug
       Created Time: history.created_time
       Created Date: history.created_date
-      Email: user.email
       Connection Name: history.connection_name
-    row: 15
+      ID: query.id
+      Looker User Email: user.email
+    row: 16
     col: 0
     width: 24
     height: 5
@@ -97,7 +98,7 @@
       Created Date: jobs_by_project.creation_time_date
       Region: jobs_by_project.region
       Project Name: jobs_by_project.project_name
-    row: 22
+    row: 23
     col: 0
     width: 24
     height: 7
@@ -140,7 +141,7 @@
       Created Date: jobs_by_project.creation_time_date
       Region: jobs_by_project.region
       Project Name: jobs_by_project.project_name
-    row: 29
+    row: 30
     col: 0
     width: 24
     height: 12
@@ -155,7 +156,7 @@
       source_query.model, query.view, source_query.view]
     filters:
       history.source: ''
-    sorts: [history.created_time desc]
+    sorts: [history.runtime desc]
     limit: 500
     column_limit: 50
     show_view_names: false
@@ -179,7 +180,8 @@
       Created Time: history.created_time
       Created Date: history.created_date
       Connection Name: history.connection_name
-    row: 3
+      ID: query.id
+    row: 4
     col: 0
     width: 24
     height: 12
@@ -189,19 +191,21 @@
     subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"See slowest queries"}],"align":"center"},{"type":"p","children":[{"text":""}],"id":1679500683737},{"type":"p","id":1679500710818,"children":[{"text":"Add
       the Slug of the queries to the filter at the top to see both the BigQuery and
-      Looker metrics below"}],"align":"center"}]'
+      Looker metrics below."}],"align":"center"},{"type":"p","id":1679502446164,"align":"center","children":[{"text":"Can
+      also get the Query ID from the "},{"text":"Looker Most Run Queries","bold":true},{"text":"
+      dashboard."}]}]'
     rich_content_json: '{"format":"slate"}'
     row: 0
     col: 0
     width: 24
-    height: 3
+    height: 4
   - name: " (Copy)"
     type: text
     title_text: " (Copy)"
     subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Big Query Information"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 20
+    row: 21
     col: 0
     width: 24
     height: 2
@@ -261,8 +265,8 @@
     explore: query_metrics
     listens_to_filters: []
     field: history.created_time
-  - name: Email
-    title: Email
+  - name: Looker User Email
+    title: Looker User Email
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -287,6 +291,21 @@
     explore: query_metrics
     listens_to_filters: []
     field: history.connection_name
+  - name: ID
+    title: ID
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options:
+      - '1'
+    model: system__activity
+    explore: query_metrics
+    listens_to_filters: []
+    field: query.id
   - name: Slug
     title: Slug
     type: field_filter
