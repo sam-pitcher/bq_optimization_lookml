@@ -14,6 +14,10 @@ explore: jobs_by_project {
     sql: , UNNEST(labels) AS jobs_by_project__labels ;;
     relationship: one_to_many
   }
+  join: jobs_by_project__job_stages {
+    sql: , UNNEST(job_stages) AS jobs_by_project__job_stages ;;
+    relationship: one_to_many
+  }
 }
 
 explore: jobs_timeline_by_project {

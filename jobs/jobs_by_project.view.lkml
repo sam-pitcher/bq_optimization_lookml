@@ -1,6 +1,6 @@
 view: jobs_by_project {
   derived_table: {
-    sql: select * from `{{ _filters['jobs_timeline_by_project.project_name'] }}`.`region-{{ _filters['jobs_timeline_by_project.region'] }}`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    sql: select * from `{{ _filters['jobs_by_project.project_name'] }}`.`region-{{ _filters['jobs_by_project.region'] }}`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
       ;;
   }
 
@@ -11,6 +11,12 @@ view: jobs_by_project {
   filter: region {
     type: string
     suggestions: ["eu","us"]
+  }
+
+  dimension: job_id {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}.job_id ;;
   }
 
   dimension_group: creation_time {
@@ -31,11 +37,6 @@ view: jobs_by_project {
   dimension: user_email {
     type: string
     sql: ${TABLE}.user_email ;;
-  }
-
-  dimension: job_id {
-    type: string
-    sql: ${TABLE}.job_id ;;
   }
 
   dimension: job_type {
@@ -81,6 +82,16 @@ view: jobs_by_project {
   dimension: bytes_processed {
     type: number
     sql: ${TABLE}.total_bytes_processed ;;
+  }
+
+  dimension: kilobytes_processed {
+    type: number
+    sql: ${bytes_processed} * 1e-3 ;;
+  }
+
+  dimension: megabytes_processed {
+    type: number
+    sql: ${bytes_processed} * 1e-6 ;;
   }
 
   dimension: gigabytes_processed {
@@ -203,6 +214,20 @@ view: jobs_by_project {
     html: {{rendered_value}} slots ;;
   }
 
+  measure: total_kilobytes_processed {
+    type: sum
+    sql: ${kilobytes_processed} ;;
+    value_format_name: decimal_0
+    html: {{rendered_value}} kb ;;
+  }
+
+  measure: total_megabytes_processed {
+    type: sum
+    sql: ${megabytes_processed} ;;
+    value_format_name: decimal_0
+    html: {{rendered_value}} mb ;;
+  }
+
   measure: total_gigabytes_processed {
     type: sum
     sql: ${gigabytes_processed} ;;
@@ -222,4 +247,147 @@ view: jobs_by_project {
 view: jobs_by_project__labels {
   dimension: key {}
   dimension: value {}
+}
+
+view: jobs_by_project__job_stages {
+  dimension: name {
+    type: string
+    sql: ${TABLE}.name ;;
+  }
+
+  dimension: id {
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension: start_ms {
+    type: number
+    sql: ${TABLE}.start_ms ;;
+  }
+
+  dimension: end_ms {
+    type: number
+    sql: ${TABLE}.end_ms ;;
+  }
+
+  dimension: wait_ratio_avg {
+    type: number
+    sql: ${TABLE}.wait_Ratio_Avg ;;
+  }
+
+  dimension: wait_ms_avg {
+    type: number
+    sql: ${TABLE}.wait_Ms_Avg ;;
+  }
+
+  dimension: wait_ratio_max {
+    type: number
+    sql: ${TABLE}.wait_Ratio_Max ;;
+  }
+
+  dimension: wait_ms_max {
+    type: number
+    sql: ${TABLE}.wait_Ms_Max ;;
+  }
+
+  dimension: read_ratio_avg {
+    type: number
+    sql: ${TABLE}.read_Ratio_Avg ;;
+  }
+
+  dimension: read_ms_avg {
+    type: number
+    sql: ${TABLE}.read_Ms_Avg ;;
+  }
+
+  dimension: read_ratio_max {
+    type: number
+    sql: ${TABLE}.read_Ratio_Max ;;
+  }
+
+  dimension: read_ms_max {
+    type: number
+    sql: ${TABLE}.read_Ms_Max ;;
+  }
+
+  dimension: compute_ratio_avg {
+    type: number
+    sql: ${TABLE}.compute_Ratio_Avg ;;
+  }
+
+  dimension: compute_ms_avg {
+    type: number
+    sql: ${TABLE}.compute_Ms_Avg ;;
+  }
+
+  dimension: compute_ratio_max {
+    type: number
+    sql: ${TABLE}.compute_Ratio_Max ;;
+  }
+
+  dimension: compute_ms_max {
+    type: number
+    sql: ${TABLE}.compute_Ms_Max ;;
+  }
+
+  dimension: write_ratio_avg {
+    type: number
+    sql: ${TABLE}.write_Ratio_Avg ;;
+  }
+
+  dimension: write_ms_avg {
+    type: number
+    sql: ${TABLE}.write_Ms_Avg ;;
+  }
+
+  dimension: write_ratio_max {
+    type: number
+    sql: ${TABLE}.write_Ratio_Max ;;
+  }
+
+  dimension: write_ms_max {
+    type: number
+    sql: ${TABLE}.write_Ms_Max ;;
+  }
+
+  dimension: shuffle_output_bytes {
+    type: number
+    sql: ${TABLE}.shuffle_Output_Bytes ;;
+  }
+
+  dimension: shuffle_output_bytes_spilled {
+    type: number
+    sql: ${TABLE}.shuffle_Output_Bytes_Spilled ;;
+  }
+
+  dimension: records_read {
+    type: number
+    sql: ${TABLE}.records_Read ;;
+  }
+
+  dimension: records_written {
+    type: number
+    sql: ${TABLE}.records_Written ;;
+  }
+
+  dimension: parallel_inputs {
+    type: number
+    sql: ${TABLE}.parallel_Inputs ;;
+  }
+
+  dimension: completed_parallel_inputs {
+    type: number
+    sql: ${TABLE}.completed_Parallel_Inputs ;;
+  }
+
+  dimension: status {
+    type: string
+    sql: ${TABLE}.status ;;
+  }
+
+  dimension: slot_ms {
+    type: number
+    sql: ${TABLE}.slot_Ms ;;
+  }
+
 }
