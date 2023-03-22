@@ -1,6 +1,21 @@
 include: "/jobs/*.view.lkml"
 include: "/dashboards/*.dashboard"
 
+explore: jobs_by_project {
+  sql_always_where:
+  ${jobs_by_project.job_type} = 'QUERY' AND ${jobs_by_project.statement_type} <> 'SCRIPT' ;;
+  always_filter: {
+    filters: [
+      project_name: "",
+      region: "us"
+    ]
+  }
+  join: jobs_by_project__labels {
+    sql: , UNNEST(labels) AS jobs_by_project__labels ;;
+    relationship: one_to_many
+  }
+}
+
 explore: jobs_timeline_by_project {
   sql_always_where:
   ${jobs_timeline_by_project.job_type} = 'QUERY' AND ${jobs_timeline_by_project.statement_type} <> 'SCRIPT' ;;

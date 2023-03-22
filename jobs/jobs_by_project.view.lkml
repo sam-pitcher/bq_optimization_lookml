@@ -1,0 +1,225 @@
+view: jobs_by_project {
+  derived_table: {
+    sql: select * from `{{ _filters['jobs_timeline_by_project.project_name'] }}`.`region-{{ _filters['jobs_timeline_by_project.region'] }}`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+      ;;
+  }
+
+  filter: project_name {
+    type: string
+  }
+
+  filter: region {
+    type: string
+    suggestions: ["eu","us"]
+  }
+
+  dimension_group: creation_time {
+    type: time
+    sql: ${TABLE}.creation_time ;;
+  }
+
+  dimension: project_id {
+    type: string
+    sql: ${TABLE}.project_id ;;
+  }
+
+  dimension: project_number {
+    type: number
+    sql: ${TABLE}.project_number ;;
+  }
+
+  dimension: user_email {
+    type: string
+    sql: ${TABLE}.user_email ;;
+  }
+
+  dimension: job_id {
+    type: string
+    sql: ${TABLE}.job_id ;;
+  }
+
+  dimension: job_type {
+    type: string
+    sql: ${TABLE}.job_type ;;
+  }
+
+  dimension: statement_type {
+    type: string
+    sql: ${TABLE}.statement_type ;;
+  }
+
+  dimension: priority {
+    type: string
+    sql: ${TABLE}.priority ;;
+  }
+
+  dimension_group: start_time {
+    type: time
+    sql: ${TABLE}.start_time ;;
+  }
+
+  dimension_group: end_time {
+    type: time
+    sql: ${TABLE}.end_time ;;
+  }
+
+  dimension: query {
+    type: string
+    sql: ${TABLE}.query ;;
+  }
+
+  dimension: state {
+    type: string
+    sql: ${TABLE}.state ;;
+  }
+
+  dimension: reservation_id {
+    type: string
+    sql: ${TABLE}.reservation_id ;;
+  }
+
+  dimension: bytes_processed {
+    type: number
+    sql: ${TABLE}.total_bytes_processed ;;
+  }
+
+  dimension: gigabytes_processed {
+    type: number
+    sql: ${bytes_processed} * 1e-9 ;;
+  }
+
+  dimension: terrabytes_processed {
+    type: number
+    sql: ${bytes_processed} * 1e-12 ;;
+  }
+
+  dimension: total_slot_ms {
+    type: number
+    sql: ${TABLE}.total_slot_ms ;;
+  }
+
+  dimension: slots {
+    type: number
+    sql: ${total_slot_ms} / 1000.0 ;;
+  }
+
+
+  dimension: error_result {
+    type: string
+    sql: ${TABLE}.error_result ;;
+  }
+
+  dimension: cache_hit {
+    type: yesno
+    sql: ${TABLE}.cache_hit ;;
+  }
+
+  dimension: destination_table {
+    type: string
+    sql: ${TABLE}.destination_table ;;
+  }
+
+  dimension: referenced_tables {
+    type: string
+    sql: ${TABLE}.referenced_tables ;;
+  }
+
+  dimension: labels {
+    type: string
+    sql: ${TABLE}.labels ;;
+  }
+
+  dimension: timeline {
+    type: string
+    sql: ${TABLE}.timeline ;;
+  }
+
+  dimension: job_stages {
+    type: string
+    sql: ${TABLE}.job_stages ;;
+  }
+
+  dimension: total_bytes_billed {
+    type: number
+    sql: ${TABLE}.total_bytes_billed ;;
+  }
+
+  dimension: transaction_id {
+    type: string
+    sql: ${TABLE}.transaction_id ;;
+  }
+
+  dimension: parent_job_id {
+    type: string
+    sql: ${TABLE}.parent_job_id ;;
+  }
+
+  dimension: session_info {
+    type: string
+    sql: ${TABLE}.session_info ;;
+  }
+
+  dimension: dml_statistics {
+    type: string
+    sql: ${TABLE}.dml_statistics ;;
+  }
+
+  dimension: total_modified_partitions {
+    type: number
+    sql: ${TABLE}.total_modified_partitions ;;
+  }
+
+  dimension: bi_engine_statistics {
+    type: string
+    sql: ${TABLE}.bi_engine_statistics ;;
+  }
+
+  dimension: query_info {
+    type: string
+    sql: ${TABLE}.query_info ;;
+  }
+
+  dimension: transferred_bytes {
+    type: number
+    sql: ${TABLE}.transferred_bytes ;;
+  }
+
+  measure: job_count {
+    type: count_distinct
+    sql: ${job_id} ;;
+  }
+
+  measure: total_slots {
+    type: sum
+    sql: ${slots} ;;
+    value_format_name: decimal_0
+    html: {{rendered_value}} slots ;;
+  }
+
+  measure: max_slots {
+    type: max
+    sql: ${slots} ;;
+    value_format_name: decimal_0
+    html: {{rendered_value}} slots ;;
+  }
+
+  measure: total_gigabytes_processed {
+    type: sum
+    sql: ${gigabytes_processed} ;;
+    value_format_name: decimal_0
+    html: {{rendered_value}} gb ;;
+  }
+
+  measure: total_terrabytes_processed {
+    type: sum
+    sql: ${terrabytes_processed} ;;
+    value_format_name: decimal_0
+    html: {{rendered_value}} tb ;;
+  }
+
+}
+
+view: jobs_by_project__labels {
+  dimension: key {}
+  dimension: value {}
+}
