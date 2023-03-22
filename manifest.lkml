@@ -2,4 +2,5 @@
 
 constant: connection_name {
   value: "sam-pitcher-playground"
+  export: override_required
 }
