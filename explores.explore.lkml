@@ -40,3 +40,13 @@ explore: quantile_statistics {
     ]
   }
 }
+
+explore: quantile_statistics_hourly {
+  always_filter: {
+    filters: [
+      period_start_filter: "2023-01-01",
+      project_name: "",
+      region: "us"
+    ]
+  }
+}

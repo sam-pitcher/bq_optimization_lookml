@@ -13,8 +13,7 @@
     fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
       jobs_timeline_by_project.total_gigabytes_processed, jobs_timeline_by_project.total_slots,
       jobs_timeline_by_project.max_slots]
-    filters:
-      jobs_timeline_by_project.period_start_date: 2023/03/17
+    filters: {}
     sorts: [jobs_timeline_by_project.period_start_time]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -45,8 +44,8 @@
     defaults_version: 1
     hidden_fields: [jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots]
     listen:
-      Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
+      Project Name: jobs_timeline_by_project.project_name
       Period Start Time: jobs_timeline_by_project.period_start_time
     row: 2
     col: 0
@@ -80,8 +79,7 @@
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_slots,
       jobs_timeline_by_project.max_slots, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.period_start_time]
-    filters:
-      jobs_timeline_by_project.period_start_date: 2023/03/17
+    filters: {}
     sorts: [jobs_timeline_by_project.period_start_time]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -125,8 +123,8 @@
     defaults_version: 1
     series_types: {}
     listen:
-      Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
+      Project Name: jobs_timeline_by_project.project_name
       Period Start Time: jobs_timeline_by_project.period_start_time
     row: 21
     col: 0
@@ -140,8 +138,7 @@
     fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
       jobs_timeline_by_project.total_gigabytes_processed, jobs_timeline_by_project.total_slots,
       jobs_timeline_by_project.max_slots]
-    filters:
-      jobs_timeline_by_project.period_start_date: 2023/03/17
+    filters: {}
     sorts: [jobs_timeline_by_project.period_start_time]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -181,8 +178,8 @@
     defaults_version: 1
     hidden_fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed]
     listen:
-      Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
+      Project Name: jobs_timeline_by_project.project_name
       Period Start Time: jobs_timeline_by_project.period_start_time
     row: 12
     col: 0
@@ -204,13 +201,52 @@
     show_view_names: false
     defaults_version: 1
     listen:
-      Project Name: quantile_statistics.project_name
       Region: quantile_statistics.region
+      Project Name: quantile_statistics.project_name
       Period Start Time: quantile_statistics.period_start_filter
     row: 41
-    col: 6
-    width: 11
-    height: 8
+    col: 0
+    width: 8
+    height: 9
+  - title: Hourly Quantile Statistics
+    name: Hourly Quantile Statistics
+    # model: bq_optimization
+    explore: quantile_statistics_hourly
+    type: looker_grid
+    fields: [quantile_statistics_hourly.hour, quantile_statistics_hourly.percentile_50,
+      quantile_statistics_hourly.percentile_70, quantile_statistics_hourly.percentile_90,
+      quantile_statistics_hourly.percentile_93, quantile_statistics_hourly.percentile_94,
+      quantile_statistics_hourly.percentile_95, quantile_statistics_hourly.percentile_96,
+      quantile_statistics_hourly.percentile_97, quantile_statistics_hourly.percentile_98,
+      quantile_statistics_hourly.percentile_99]
+    filters: {}
+    sorts: [quantile_statistics_hourly.hour]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    listen:
+      Region: quantile_statistics_hourly.region
+      Project Name: quantile_statistics_hourly.project_name
+      Period Start Time: quantile_statistics_hourly.period_start_filter
+    row: 41
+    col: 8
+    width: 16
+    height: 9
   filters:
   - name: Region
     title: Region
@@ -228,7 +264,7 @@
   - name: Project Name
     title: Project Name
     type: field_filter
-    default_value: sam-pitcher-playground
+    default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:

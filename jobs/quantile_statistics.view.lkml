@@ -109,6 +109,62 @@ LIMIT
     sql: ${TABLE}.percentile99 ;;
   }
 
+}
 
+view: quantile_statistics_hourly {
+  extends: [quantile_statistics]
+  derived_table: {
+    sql:
+    WITH a AS (
+      WITH
+        all_seconds AS (
+        SELECT
+          period_start
+        FROM (
+          SELECT
+            period_start
+          FROM
+            UNNEST (GENERATE_TIMESTAMP_ARRAY({% date_start period_start_filter %}, {% date_end period_start_filter %}, INTERVAL 1 SECOND)) period_start )),
+        seconds_when_project_was_active AS (
+        SELECT
+          period_start,
+          SUM(period_slot_ms)/1000.0 AS total_slots_this_second
+        FROM
+          `{{ _filters['quantile_statistics_hourly.project_name'] }}`.`region-{{ _filters['quantile_statistics_hourly.region'] }}`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
+        GROUP BY
+          period_start),
+        full_project_timeline AS (
+        SELECT
+          s.period_start,
+          IFNULL(a.total_slots_this_second, 0) AS total_slots_this_second
+        FROM
+          all_seconds s
+        LEFT JOIN
+          seconds_when_project_was_active a
+        USING
+          (period_start) )
+      SELECT
+        extract(hour from period_start) as hour,
+        PERCENTILE_CONT(total_slots_this_second, 0.50) OVER(partition by extract(hour from period_start)) AS percentile50,
+        PERCENTILE_CONT(total_slots_this_second, 0.70) OVER(partition by extract(hour from period_start)) AS percentile70,
+        PERCENTILE_CONT(total_slots_this_second, 0.90) OVER(partition by extract(hour from period_start)) AS percentile90,
+        PERCENTILE_CONT(total_slots_this_second, 0.93) OVER(partition by extract(hour from period_start)) AS percentile93,
+        PERCENTILE_CONT(total_slots_this_second, 0.94) OVER(partition by extract(hour from period_start)) AS percentile94,
+        PERCENTILE_CONT(total_slots_this_second, 0.95) OVER(partition by extract(hour from period_start)) AS percentile95,
+        PERCENTILE_CONT(total_slots_this_second, 0.96) OVER(partition by extract(hour from period_start)) AS percentile96,
+        PERCENTILE_CONT(total_slots_this_second, 0.97) OVER(partition by extract(hour from period_start)) AS percentile97,
+        PERCENTILE_CONT(total_slots_this_second, 0.98) OVER(partition by extract(hour from period_start)) AS percentile98,
+        PERCENTILE_CONT(total_slots_this_second, 0.99) OVER(partition by extract(hour from period_start)) AS percentile99
+      FROM
+        full_project_timeline)
+      SELECT * FROM a
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11 ;;
+
+  }
+
+  dimension: hour {
+    type: number
+    sql: ${TABLE}.hour ;;
+  }
 
 }
