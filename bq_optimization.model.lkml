@@ -2,6 +2,8 @@ connection: "sam-pitcher-playground"
 
 include: "/jobs/*.view.lkml"
 
+include: "/dashboards/*.dashboard"
+
 explore: jobs_timeline_by_project {
   sql_always_where:
   ${jobs_timeline_by_project.job_type} = 'QUERY' AND ${jobs_timeline_by_project.statement_type} <> 'SCRIPT' ;;
