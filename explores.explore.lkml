@@ -1,5 +1,4 @@
 include: "/jobs/*.view.lkml"
-
 include: "/dashboards/*.dashboard"
 
 explore: jobs_timeline_by_project {

@@ -7,7 +7,7 @@
   elements:
   - title: Time Series Job Count and gb Processed
     name: Time Series Job Count and gb Processed
-    model: bq_optimization
+    # model: bq_optimization
     explore: jobs_timeline_by_project
     type: looker_line
     fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
@@ -73,7 +73,7 @@
     height: 2
   - title: Time Series Table
     name: Time Series Table
-    model: bq_optimization
+    # model: bq_optimization
     explore: jobs_timeline_by_project
     type: looker_grid
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_slots,
@@ -132,7 +132,7 @@
     height: 18
   - title: Time Series Max and Total Slots
     name: Time Series Max and Total Slots
-    model: bq_optimization
+    # model: bq_optimization
     explore: jobs_timeline_by_project
     type: looker_line
     fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
@@ -187,7 +187,7 @@
     height: 9
   - title: Percentiles
     name: Percentiles
-    model: bq_optimization
+    # model: bq_optimization
     explore: quantile_statistics
     type: looker_single_record
     fields: [quantile_statistics.percentile_50, quantile_statistics.percentile_70,
@@ -219,7 +219,7 @@
       type: relative_timeframes
       display: inline
       options: []
-    model: bq_optimization
+    # model: bq_optimization
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: jobs_timeline_by_project.period_start_date
@@ -232,7 +232,7 @@
     ui_config:
       type: advanced
       display: popover
-    model: bq_optimization
+    # model: bq_optimization
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: jobs_timeline_by_project.region
@@ -246,7 +246,7 @@
       type: advanced
       display: popover
       options: []
-    model: bq_optimization
+    # model: bq_optimization
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: jobs_timeline_by_project.project_name
