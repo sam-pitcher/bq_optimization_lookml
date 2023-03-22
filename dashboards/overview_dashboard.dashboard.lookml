@@ -47,6 +47,7 @@
       Period Start Date: jobs_timeline_by_project.period_start_date
       Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
+      Period Start Time: jobs_timeline_by_project.period_start_time
     row: 2
     col: 0
     width: 24
@@ -126,6 +127,7 @@
       Period Start Date: jobs_timeline_by_project.period_start_date
       Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
+      Period Start Time: jobs_timeline_by_project.period_start_time
     row: 21
     col: 0
     width: 24
@@ -181,6 +183,7 @@
       Period Start Date: jobs_timeline_by_project.period_start_date
       Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
+      Period Start Time: jobs_timeline_by_project.period_start_time
     row: 12
     col: 0
     width: 24
@@ -239,7 +242,7 @@
   - name: Period Start Date
     title: Period Start Date
     type: field_filter
-    default_value: 2023/03/17 to 2023/03/22
+    default_value: today
     allow_multiple_values: true
     required: false
     ui_config:
@@ -250,3 +253,17 @@
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: jobs_timeline_by_project.period_start_date
+  - name: Period Start Time
+    title: Period Start Time
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    # model: bq_optimization
+    explore: jobs_timeline_by_project
+    listens_to_filters: []
+    field: jobs_timeline_by_project.period_start_time
