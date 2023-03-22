@@ -13,7 +13,8 @@
     fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
       jobs_timeline_by_project.total_gigabytes_processed, jobs_timeline_by_project.total_slots,
       jobs_timeline_by_project.max_slots]
-    filters: {}
+    filters:
+      jobs_timeline_by_project.period_start_date: 2023/03/17
     sorts: [jobs_timeline_by_project.period_start_time]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -44,7 +45,6 @@
     defaults_version: 1
     hidden_fields: [jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots]
     listen:
-      Period Start Date: jobs_timeline_by_project.period_start_date
       Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
       Period Start Time: jobs_timeline_by_project.period_start_time
@@ -80,7 +80,8 @@
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_slots,
       jobs_timeline_by_project.max_slots, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.period_start_time]
-    filters: {}
+    filters:
+      jobs_timeline_by_project.period_start_date: 2023/03/17
     sorts: [jobs_timeline_by_project.period_start_time]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -124,7 +125,6 @@
     defaults_version: 1
     series_types: {}
     listen:
-      Period Start Date: jobs_timeline_by_project.period_start_date
       Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
       Period Start Time: jobs_timeline_by_project.period_start_time
@@ -140,7 +140,8 @@
     fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
       jobs_timeline_by_project.total_gigabytes_processed, jobs_timeline_by_project.total_slots,
       jobs_timeline_by_project.max_slots]
-    filters: {}
+    filters:
+      jobs_timeline_by_project.period_start_date: 2023/03/17
     sorts: [jobs_timeline_by_project.period_start_time]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -180,7 +181,6 @@
     defaults_version: 1
     hidden_fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed]
     listen:
-      Period Start Date: jobs_timeline_by_project.period_start_date
       Project Name: jobs_timeline_by_project.project_name
       Region: jobs_timeline_by_project.region
       Period Start Time: jobs_timeline_by_project.period_start_time
@@ -204,9 +204,9 @@
     show_view_names: false
     defaults_version: 1
     listen:
-      Period Start Date: quantile_statistics.period_start_filter
       Project Name: quantile_statistics.project_name
       Region: quantile_statistics.region
+      Period Start Time: quantile_statistics.period_start_filter
     row: 41
     col: 6
     width: 11
@@ -239,24 +239,10 @@
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: jobs_timeline_by_project.project_name
-  - name: Period Start Date
-    title: Period Start Date
-    type: field_filter
-    default_value: today
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: relative_timeframes
-      display: inline
-      options: []
-    # model: bq_optimization
-    explore: jobs_timeline_by_project
-    listens_to_filters: []
-    field: jobs_timeline_by_project.period_start_date
   - name: Period Start Time
     title: Period Start Time
     type: field_filter
-    default_value: ''
+    default_value: 1 day
     allow_multiple_values: true
     required: false
     ui_config:
