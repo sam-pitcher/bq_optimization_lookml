@@ -45,8 +45,8 @@
     hidden_fields: [jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots]
     listen:
       Period Start Date: jobs_timeline_by_project.period_start_date
-      Region: jobs_timeline_by_project.region
       Project Name: jobs_timeline_by_project.project_name
+      Region: jobs_timeline_by_project.region
     row: 2
     col: 0
     width: 24
@@ -124,8 +124,8 @@
     series_types: {}
     listen:
       Period Start Date: jobs_timeline_by_project.period_start_date
-      Region: jobs_timeline_by_project.region
       Project Name: jobs_timeline_by_project.project_name
+      Region: jobs_timeline_by_project.region
     row: 21
     col: 0
     width: 24
@@ -179,8 +179,8 @@
     hidden_fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed]
     listen:
       Period Start Date: jobs_timeline_by_project.period_start_date
-      Region: jobs_timeline_by_project.region
       Project Name: jobs_timeline_by_project.project_name
+      Region: jobs_timeline_by_project.region
     row: 12
     col: 0
     width: 24
@@ -202,36 +202,22 @@
     defaults_version: 1
     listen:
       Period Start Date: quantile_statistics.period_start_filter
-      Region: quantile_statistics.region
       Project Name: quantile_statistics.project_name
+      Region: quantile_statistics.region
     row: 41
     col: 6
     width: 11
     height: 8
   filters:
-  - name: Period Start Date
-    title: Period Start Date
-    type: field_filter
-    default_value: 2023/03/17 to 2023/03/22
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: relative_timeframes
-      display: inline
-      options: []
-    # model: bq_optimization
-    explore: jobs_timeline_by_project
-    listens_to_filters: []
-    field: jobs_timeline_by_project.period_start_date
   - name: Region
     title: Region
     type: field_filter
     default_value: us
     allow_multiple_values: true
-    required: false
+    required: true
     ui_config:
-      type: advanced
-      display: popover
+      type: button_toggles
+      display: inline
     # model: bq_optimization
     explore: jobs_timeline_by_project
     listens_to_filters: []
@@ -250,3 +236,17 @@
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: jobs_timeline_by_project.project_name
+  - name: Period Start Date
+    title: Period Start Date
+    type: field_filter
+    default_value: 2023/03/17 to 2023/03/22
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: relative_timeframes
+      display: inline
+      options: []
+    # model: bq_optimization
+    explore: jobs_timeline_by_project
+    listens_to_filters: []
+    field: jobs_timeline_by_project.period_start_date

@@ -63,9 +63,7 @@
       jobs_by_project__labels.value, jobs_by_project.job_id, jobs_by_project.job_type,
       jobs_by_project.total_kilobytes_processed, jobs_by_project.total_megabytes_processed,
       jobs_by_project.max_slots, jobs_by_project.total_slots, jobs_by_project.total_slot_ms]
-    filters:
-      jobs_by_project.project_name: sam-pitcher-playground
-      jobs_by_project.region: us
+    filters: {}
     sorts: [jobs_by_project__labels.value]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -97,6 +95,8 @@
       Slug: jobs_by_project__labels.value
       Created Time: jobs_by_project.creation_time_time
       Created Date: jobs_by_project.creation_time_date
+      Region: jobs_by_project.region
+      Project Name: jobs_by_project.project_name
     row: 22
     col: 0
     width: 24
@@ -113,9 +113,7 @@
       jobs_by_project__job_stages.write_ms_avg, jobs_by_project__job_stages.read_ms_avg,
       jobs_by_project__job_stages.records_read, jobs_by_project__job_stages.records_written,
       jobs_by_project__job_stages.shuffle_output_bytes]
-    filters:
-      jobs_by_project.project_name: sam-pitcher-playground
-      jobs_by_project.region: us
+    filters: {}
     sorts: [jobs_by_project__labels.value, jobs_by_project__job_stages.name]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -140,6 +138,8 @@
       Slug: jobs_by_project__labels.value
       Created Time: jobs_by_project.creation_time_time
       Created Date: jobs_by_project.creation_time_date
+      Region: jobs_by_project.region
+      Project Name: jobs_by_project.project_name
     row: 29
     col: 0
     width: 24
@@ -206,6 +206,33 @@
     width: 24
     height: 2
   filters:
+  - name: Region
+    title: Region
+    type: field_filter
+    default_value: us
+    allow_multiple_values: true
+    required: true
+    ui_config:
+      type: button_toggles
+      display: inline
+    # model: bq_optimization
+    explore: jobs_by_project
+    listens_to_filters: []
+    field: jobs_by_project.region
+  - name: Project Name
+    title: Project Name
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: false
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    # model: bq_optimization
+    explore: jobs_by_project
+    listens_to_filters: []
+    field: jobs_by_project.project_name
   - name: Created Date
     title: Created Date
     type: field_filter
