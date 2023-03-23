@@ -49,10 +49,10 @@
       Created Time: history.created_time
       Created Date: history.created_date
       Connection Name: history.connection_name
-      Looker User Email: user.email
       Query ID: query.id
       Model: query.model
       Explore: query.view
+      Looker User Email: user.email
     row: 16
     col: 0
     width: 24
@@ -193,6 +193,7 @@
       Query ID: query.id
       Model: query.model
       Explore: query.view
+      Looker User Email: user.email
     row: 4
     col: 0
     width: 24
