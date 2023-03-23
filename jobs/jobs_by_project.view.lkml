@@ -1,6 +1,6 @@
 view: jobs_by_project {
   derived_table: {
-    sql: select * from `{{ _filters['jobs_by_project.project_name'] }}`.`region-{{ _filters['jobs_by_project.region'] }}`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    sql: select * from `{{ _filters['jobs_by_project.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['jobs_by_project.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
       ;;
   }
 

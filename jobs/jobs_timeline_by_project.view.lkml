@@ -1,6 +1,6 @@
 view: jobs_timeline_by_project {
   derived_table: {
-    sql: SELECT * FROM `{{ _filters['jobs_timeline_by_project.project_name'] }}`.`region-{{ _filters['jobs_timeline_by_project.region'] }}`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT ;;
+    sql: SELECT * FROM `{{ _filters['jobs_timeline_by_project.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['jobs_timeline_by_project.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT ;;
   }
 
   filter: project_name {
