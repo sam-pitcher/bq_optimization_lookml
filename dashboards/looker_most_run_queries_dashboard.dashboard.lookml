@@ -66,6 +66,8 @@
       Created Date: history.created_date
       Status: history.status
       Looker User Email: user.email
+      Model: query.model
+      Results from Database: history.database_result_query_count
     row: 3
     col: 0
     width: 24
@@ -174,3 +176,30 @@
     explore: history
     listens_to_filters: []
     field: user.email
+  - name: Model
+    title: Model
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+    model: system__activity
+    explore: history
+    listens_to_filters: []
+    field: query.model
+  - name: Results from Database
+    title: Results from Database
+    type: field_filter
+    default_value: ">=1"
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    model: system__activity
+    explore: history
+    listens_to_filters: []
+    field: history.database_result_query_count
