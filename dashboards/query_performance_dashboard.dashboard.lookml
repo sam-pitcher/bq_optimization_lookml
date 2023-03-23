@@ -49,8 +49,10 @@
       Created Time: history.created_time
       Created Date: history.created_date
       Connection Name: history.connection_name
-      ID: query.id
       Looker User Email: user.email
+      Query ID: query.id
+      Model: query.model
+      Explore: query.view
     row: 16
     col: 0
     width: 24
@@ -152,8 +154,7 @@
     type: looker_grid
     fields: [history.runtime, history.created_time, history.connection_name, history.slug,
       history.status, user.name, user.email, history.source, history.id, query.id,
-      source_query.id, query.link, source_query.link, query.formatted_fields, query.model,
-      source_query.model, query.view, source_query.view]
+      query.link, query.model, query.view, query.formatted_fields]
     filters:
       history.source: ''
     sorts: [history.runtime desc]
@@ -170,17 +171,28 @@
     limit_displayed_rows: false
     enable_conditional_formatting: false
     header_text_alignment: left
-    header_font_size: 12
-    rows_font_size: 12
+    header_font_size: '12'
+    rows_font_size: '12'
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    series_labels:
+      history.id: History ID
+      query.id: Query ID
+      user.name: User Name
+      user.email: User Email
     defaults_version: 1
     listen:
       Slug: history.slug
       Created Time: history.created_time
       Created Date: history.created_date
       Connection Name: history.connection_name
-      ID: query.id
+      Query ID: query.id
+      Model: query.model
+      Explore: query.view
     row: 4
     col: 0
     width: 24
@@ -291,8 +303,34 @@
     explore: query_metrics
     listens_to_filters: []
     field: history.connection_name
-  - name: ID
-    title: ID
+  - name: Model
+    title: Model
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+    model: system__activity
+    explore: history
+    listens_to_filters: []
+    field: query.model
+  - name: Explore
+    title: Explore
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: system__activity
+    explore: query_metrics
+    listens_to_filters: []
+    field: query.view
+  - name: Query ID
+    title: Query ID
     type: field_filter
     default_value: ''
     allow_multiple_values: true
