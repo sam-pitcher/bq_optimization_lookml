@@ -18,6 +18,11 @@ explore: jobs_by_project {
     sql: , UNNEST(job_stages) AS jobs_by_project__job_stages ;;
     relationship: one_to_many
   }
+  join: jobs_timeline_by_project {
+    type: left_outer
+    sql_on: ${jobs_timeline_by_project.job_id} = ${jobs_by_project.job_id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: jobs_timeline_by_project {
@@ -28,15 +33,6 @@ explore: jobs_timeline_by_project {
       project_name: "",
       region: "us"
     ]
-  }
-  join: jobs_by_project {
-    type: left_outer
-    sql_on: ${jobs_timeline_by_project.job_id} = ${jobs_by_project.job_id} ;;
-    relationship: many_to_one
-  }
-  join: jobs_by_project__labels {
-    sql: , UNNEST(labels) AS jobs_by_project__labels ;;
-    relationship: one_to_many
   }
 }
 
