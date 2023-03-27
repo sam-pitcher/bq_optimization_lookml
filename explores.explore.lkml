@@ -29,8 +29,13 @@ explore: jobs_timeline_by_project {
       region: "us"
     ]
   }
-  join: jobs_by_project_timeline__labels {
-    sql: , UNNEST(labels) AS jobs_by_project_timeline__labels ;;
+  join: jobs_by_project {
+    type: left_outer
+    sql_on: ${jobs_timeline_by_project.job_id} = ${jobs_by_project.job_id} ;;
+    relationship: many_to_one
+  }
+  join: jobs_by_project__labels {
+    sql: , UNNEST(labels) AS jobs_by_project__labels ;;
     relationship: one_to_many
   }
 }
