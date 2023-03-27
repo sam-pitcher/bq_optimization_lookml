@@ -3,18 +3,17 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: gXaq53Fj8AERriiFJNiJW6
+  preferred_slug: ceqi3zexySkeTUXs8Z6mIW
   elements:
-  - title: Time Series Job Count and gb Processed
-    name: Time Series Job Count and gb Processed
-    # model: bq_optimization
+  - title: Time Series Job Count
+    name: Time Series Job Count
+    # model: sam-pitcher-playground
     explore: jobs_timeline_by_project
-    type: looker_line
-    fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
-      jobs_timeline_by_project.total_gigabytes_processed, jobs_timeline_by_project.total_slots,
-      jobs_timeline_by_project.max_slots]
+    type: looker_area
+    fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
+      jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
     filters: {}
-    sorts: [jobs_timeline_by_project.period_start_time]
+    sorts: [jobs_timeline_by_project.job_count desc 0]
     limit: 500
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
@@ -41,46 +40,53 @@
     y_axis_combined: true
     show_null_points: true
     interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
     defaults_version: 1
-    hidden_fields: [jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots]
+    hidden_fields: [jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots,
+      jobs_timeline_by_project.total_gigabytes_processed]
+    series_types: {}
     listen:
+      Period Start Time: jobs_timeline_by_project.period_start_time
       Region: parameters.region
       Project Name: parameters.project_name
-      Period Start Time: jobs_timeline_by_project.period_start_time
-    row: 2
+      Timeframe: parameters.timeframe
+    row: 3
     col: 0
-    width: 24
-    height: 10
+    width: 12
+    height: 8
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
-    body_text: '[{"type":"h1","children":[{"text":"Time Series Overview"}],"align":"center"}]'
+    body_text: '[{"type":"h1","children":[{"text":"Time Series Overview"}],"align":"center"},{"type":"p","children":[{"text":""}],"id":1679932721155},{"type":"p","children":[{"text":"Here
+      we can see the total number of Jobs being run concurrently with the amount of
+      bytes processed. Below, Max Slots shows for each Timeframe, the amount of slots
+      that the largest job is using. Total Slots is the Total Number of the slots
+      summed for the Timeframe chosen."}],"id":1679932634454}]'
     rich_content_json: '{"format":"slate"}'
     row: 0
     col: 0
     width: 24
-    height: 2
+    height: 3
   - name: " (Copy)"
     type: text
     title_text: " (Copy)"
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Percentile Overview"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 39
+    row: 29
     col: 0
     width: 24
     height: 2
-  - title: Time Series Table
-    name: Time Series Table
-    # model: bq_optimization
+  - title: Time Series Summary Table
+    name: Time Series Summary Table
+    # model: sam-pitcher-playground
     explore: jobs_timeline_by_project
     type: looker_grid
-    fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_slots,
-      jobs_timeline_by_project.max_slots, jobs_timeline_by_project.total_gigabytes_processed,
-      jobs_timeline_by_project.period_start_time]
+    fields: [jobs_timeline_by_project.period_start_from_parameter, jobs_timeline_by_project.job_count,
+      jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.total_gigabytes_processed]
     filters: {}
-    sorts: [jobs_timeline_by_project.period_start_time]
+    sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -123,23 +129,23 @@
     defaults_version: 1
     series_types: {}
     listen:
+      Period Start Time: jobs_timeline_by_project.period_start_time
       Region: parameters.region
       Project Name: parameters.project_name
-      Period Start Time: jobs_timeline_by_project.period_start_time
-    row: 21
+      Timeframe: parameters.timeframe
+    row: 19
     col: 0
     width: 24
-    height: 18
-  - title: Time Series Max and Total Slots
-    name: Time Series Max and Total Slots
-    # model: bq_optimization
+    height: 10
+  - title: Time Series Max Slots
+    name: Time Series Max Slots
+    # model: sam-pitcher-playground
     explore: jobs_timeline_by_project
-    type: looker_line
-    fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.job_count,
-      jobs_timeline_by_project.total_gigabytes_processed, jobs_timeline_by_project.total_slots,
-      jobs_timeline_by_project.max_slots]
+    type: looker_area
+    fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
+      jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
     filters: {}
-    sorts: [jobs_timeline_by_project.period_start_time]
+    sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
@@ -166,6 +172,9 @@
     y_axis_combined: true
     show_null_points: true
     interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: jobs_timeline_by_project.total_slots,
             id: jobs_timeline_by_project.total_slots, name: Total Slots}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
@@ -175,25 +184,30 @@
         type: linear}]
     x_axis_zoom: true
     y_axis_zoom: true
+    series_types: {}
+    series_colors:
+      jobs_timeline_by_project.max_slots: "#E8710A"
     defaults_version: 1
-    hidden_fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed]
+    hidden_fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
+      jobs_timeline_by_project.total_slots]
     listen:
+      Period Start Time: jobs_timeline_by_project.period_start_time
       Region: parameters.region
       Project Name: parameters.project_name
-      Period Start Time: jobs_timeline_by_project.period_start_time
-    row: 12
+      Timeframe: parameters.timeframe
+    row: 11
     col: 0
-    width: 24
-    height: 9
+    width: 12
+    height: 8
   - title: Percentiles
     name: Percentiles
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: quantile_statistics
     type: looker_single_record
-    fields: [quantile_statistics.percentile_50, quantile_statistics.percentile_70,
-      quantile_statistics.percentile_90, quantile_statistics.percentile_93, quantile_statistics.percentile_94,
-      quantile_statistics.percentile_95, quantile_statistics.percentile_96, quantile_statistics.percentile_97,
-      quantile_statistics.percentile_98, quantile_statistics.percentile_99]
+    fields: [quantile_statistics.percentile_50, quantile_statistics.percentile_60,
+      quantile_statistics.percentile_70, quantile_statistics.percentile_90, quantile_statistics.percentile_93,
+      quantile_statistics.percentile_94, quantile_statistics.percentile_95, quantile_statistics.percentile_96,
+      quantile_statistics.percentile_97, quantile_statistics.percentile_98, quantile_statistics.percentile_99]
     filters: {}
     sorts: [quantile_statistics.percentile_50]
     limit: 500
@@ -201,28 +215,144 @@
     show_view_names: false
     defaults_version: 1
     listen:
-      Region: quantile_statistics.region
-      Project Name: quantile_statistics.project_name
       Period Start Time: quantile_statistics.period_start_filter
-    row: 41
+      Region: parameters.region
+      Project Name: parameters.project_name
+    row: 31
     col: 0
     width: 8
-    height: 9
-  - title: Hourly Quantile Statistics
-    name: Hourly Quantile Statistics
-    # model: bq_optimization
-    explore: quantile_statistics_hourly
-    type: looker_grid
-    fields: [quantile_statistics_hourly.hour, quantile_statistics_hourly.percentile_50,
-      quantile_statistics_hourly.percentile_70, quantile_statistics_hourly.percentile_90,
-      quantile_statistics_hourly.percentile_93, quantile_statistics_hourly.percentile_94,
-      quantile_statistics_hourly.percentile_95, quantile_statistics_hourly.percentile_96,
-      quantile_statistics_hourly.percentile_97, quantile_statistics_hourly.percentile_98,
-      quantile_statistics_hourly.percentile_99]
+    height: 12
+  - title: Time Series Total Slots
+    name: Time Series Total Slots
+    # model: sam-pitcher-playground
+    explore: jobs_timeline_by_project
+    type: looker_area
+    fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
+      jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
     filters: {}
-    sorts: [quantile_statistics_hourly.hour]
+    sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: jobs_timeline_by_project.total_slots,
+            id: jobs_timeline_by_project.total_slots, name: Total Slots}], showLabels: true,
+        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}, {label: !!null '', orientation: right, series: [{axisId: jobs_timeline_by_project.max_slots,
+            id: jobs_timeline_by_project.max_slots, name: Max Slots}], showLabels: true,
+        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}]
+    x_axis_zoom: true
+    y_axis_zoom: true
+    series_types: {}
+    series_colors:
+      jobs_timeline_by_project.max_slots: "#E8710A"
+      jobs_timeline_by_project.total_slots: "#F9AB00"
+    defaults_version: 1
+    hidden_fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
+      jobs_timeline_by_project.max_slots]
+    listen:
+      Period Start Time: jobs_timeline_by_project.period_start_time
+      Region: parameters.region
+      Project Name: parameters.project_name
+      Timeframe: parameters.timeframe
+    row: 11
+    col: 12
+    width: 12
+    height: 8
+  - title: Time Series GB Processed
+    name: Time Series GB Processed
+    # model: sam-pitcher-playground
+    explore: jobs_timeline_by_project
+    type: looker_area
+    fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
+      jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
+    filters: {}
+    sorts: [jobs_timeline_by_project.job_count desc 0]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    series_types: {}
+    series_colors:
+      jobs_timeline_by_project.total_gigabytes_processed: "#7CB342"
+    defaults_version: 1
+    hidden_fields: [jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots,
+      jobs_timeline_by_project.job_count]
+    listen:
+      Period Start Time: jobs_timeline_by_project.period_start_time
+      Region: parameters.region
+      Project Name: parameters.project_name
+      Timeframe: parameters.timeframe
+    row: 3
+    col: 12
+    width: 12
+    height: 8
+  - title: Percentiles by Timeframe
+    name: Percentiles by Timeframe
+    # model: sam-pitcher-playground
+    explore: quantile_statistics
+    type: looker_grid
+    fields: [quantile_statistics.timeframe, quantile_statistics.percentile_50, quantile_statistics.percentile_60,
+      quantile_statistics.percentile_70, quantile_statistics.percentile_90, quantile_statistics.percentile_93,
+      quantile_statistics.percentile_94, quantile_statistics.percentile_95, quantile_statistics.percentile_96,
+      quantile_statistics.percentile_97, quantile_statistics.percentile_98, quantile_statistics.percentile_99]
+    filters: {}
+    sorts: [quantile_statistics.timeframe]
+    limit: 500
+    query_timezone: UTC
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -239,14 +369,16 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
+    series_types: {}
     listen:
-      Region: quantile_statistics_hourly.region
-      Project Name: quantile_statistics_hourly.project_name
-      Period Start Time: quantile_statistics_hourly.period_start_filter
-    row: 41
+      Period Start Time: quantile_statistics.period_start_filter
+      Region: parameters.region
+      Project Name: parameters.project_name
+      Timeframe: parameters.timeframe
+    row: 31
     col: 8
     width: 16
-    height: 9
+    height: 12
   filters:
   - name: Region
     title: Region
@@ -257,7 +389,7 @@
     ui_config:
       type: button_toggles
       display: inline
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: parameters.region
@@ -266,12 +398,12 @@
     type: field_filter
     default_value: ''
     allow_multiple_values: true
-    required: false
+    required: true
     ui_config:
       type: advanced
       display: popover
       options: []
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: parameters.project_name
@@ -285,7 +417,20 @@
       type: advanced
       display: popover
       options: []
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: jobs_timeline_by_project
     listens_to_filters: []
     field: jobs_timeline_by_project.period_start_time
+  - name: Timeframe
+    title: Timeframe
+    type: field_filter
+    default_value: hour
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: dropdown_menu
+      display: inline
+    # model: sam-pitcher-playground
+    explore: jobs_timeline_by_project
+    listens_to_filters: []
+    field: parameters.timeframe
