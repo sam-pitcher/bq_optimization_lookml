@@ -22,6 +22,10 @@ view: parameters {
       value: "hour"
       label: "Hour"
     }
+    allowed_value: {
+      value: "none"
+      label: "None"
+    }
     default_value: "second"
   }
 }

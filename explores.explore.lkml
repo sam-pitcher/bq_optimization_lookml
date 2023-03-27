@@ -49,13 +49,13 @@ explore: quantile_statistics {
   join: parameters {}
 }
 
-explore: quantile_statistics_hourly {
-  always_filter: {
-    filters: [
-      period_start_filter: "2023-01-01",
-      parameters.project_name: "",
-      parameters.region: "us"
-    ]
-  }
-  join: parameters {}
-}
+# explore: quantile_statistics_hourly {
+#   always_filter: {
+#     filters: [
+#       period_start_filter: "2023-01-01",
+#       parameters.project_name: "",
+#       parameters.region: "us"
+#     ]
+#   }
+#   join: parameters {}
+# }
