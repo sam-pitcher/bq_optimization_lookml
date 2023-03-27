@@ -130,7 +130,7 @@ view: quantile_statistics_hourly {
           period_start,
           SUM(period_slot_ms)/1000.0 AS total_slots_this_second
         FROM
-          `{{ _filters['quantile_statistics_hourly.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['quantile_statistics_hourly.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
+          `{{ _filters['parameters.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['parameters.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
         GROUP BY
           period_start),
         full_project_timeline AS (

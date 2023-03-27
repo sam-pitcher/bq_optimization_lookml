@@ -12,6 +12,17 @@ view: jobs_timeline_by_project {
   #   suggestions: ["eu","us"]
   # }
 
+  dimension: period_start_from_parameter {
+    label_from_parameter: parameters.timeframe
+    sql:
+    {% if parameters.timeframe._parameter_value == "second" %}${period_start_time}
+    {% elsif parameters.timeframe._parameter_value == "minute" %}${period_start_minute}
+    {% elsif parameters.timeframe._parameter_value == "hour" %}${period_start_hour}
+    {% else %}${period_start_time}
+    {% endif %}
+    ;;
+  }
+
   dimension_group: period_start {
     type: time
     sql: ${TABLE}.period_start ;;
