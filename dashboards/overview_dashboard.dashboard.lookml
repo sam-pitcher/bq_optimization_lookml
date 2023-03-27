@@ -44,7 +44,7 @@
     defaults_version: 1
     hidden_fields: [jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots]
     listen:
-      Region: jobs_timeline_by_project.region
+      Region: parameters.region
       Project Name: jobs_timeline_by_project.project_name
       Period Start Time: jobs_timeline_by_project.period_start_time
     row: 2
@@ -123,7 +123,7 @@
     defaults_version: 1
     series_types: {}
     listen:
-      Region: jobs_timeline_by_project.region
+      Region: parameters.region
       Project Name: jobs_timeline_by_project.project_name
       Period Start Time: jobs_timeline_by_project.period_start_time
     row: 21
@@ -178,7 +178,7 @@
     defaults_version: 1
     hidden_fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed]
     listen:
-      Region: jobs_timeline_by_project.region
+      Region: parameters.region
       Project Name: jobs_timeline_by_project.project_name
       Period Start Time: jobs_timeline_by_project.period_start_time
     row: 12
@@ -260,7 +260,7 @@
     # model: bq_optimization
     explore: jobs_timeline_by_project
     listens_to_filters: []
-    field: jobs_timeline_by_project.region
+    field: parameters.region
   - name: Project Name
     title: Project Name
     type: field_filter
