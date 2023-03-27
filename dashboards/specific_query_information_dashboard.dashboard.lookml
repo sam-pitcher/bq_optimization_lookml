@@ -1,5 +1,5 @@
 - dashboard: specific_query_information_dashboard
-  title: Query Performance Metrics
+  title: Specific Query Performance Metrics
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
