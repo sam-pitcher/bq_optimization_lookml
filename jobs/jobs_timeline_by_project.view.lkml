@@ -172,7 +172,7 @@ view: jobs_timeline_by_project {
 
 }
 
-view: jobs_by_project__labels {
+view: jobs_by_project_timeline__labels {
   dimension: key {}
   dimension: value {}
 }
