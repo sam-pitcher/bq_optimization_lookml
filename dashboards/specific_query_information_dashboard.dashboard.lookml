@@ -1,4 +1,4 @@
-- dashboard: specific_query_information_dashboard
+- dashboard: specific_query_performance_metrics
   title: Specific Query Performance Metrics
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -97,7 +97,7 @@
     row: 2
     col: 5
     width: 19
-    height: 14
+    height: 10
   - title: BQ Query Job Stages
     name: BQ Query Job Stages
     # model: sam-pitcher-playground
@@ -110,6 +110,7 @@
       jobs_by_project__job_stages.write_ms_avg, jobs_by_project__job_stages.read_ms_avg,
       jobs_by_project__job_stages.records_read, jobs_by_project__job_stages.records_written,
       jobs_by_project__job_stages.shuffle_output_bytes]
+    filters: {}
     sorts: [jobs_by_project__labels.value, jobs_by_project__job_stages.name]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -124,19 +125,34 @@
     limit_displayed_rows: false
     enable_conditional_formatting: false
     header_text_alignment: left
-    header_font_size: 12
-    rows_font_size: 12
+    header_font_size: '12'
+    rows_font_size: '12'
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    series_cell_visualizations:
+      jobs_by_project__job_stages.wait_ms_avg:
+        is_active: true
+      jobs_by_project__job_stages.write_ms_avg:
+        is_active: true
+      jobs_by_project__job_stages.shuffle_output_bytes:
+        is_active: true
+      jobs_by_project__job_stages.records_written:
+        is_active: true
+      jobs_by_project__job_stages.records_read:
+        is_active: true
+      jobs_by_project__job_stages.read_ms_avg:
+        is_active: true
     hidden_pivots: {}
     defaults_version: 1
     listen:
       Slug: jobs_by_project__labels.value
-      Created Time: jobs_by_project.creation_time_time
-      Created Date: jobs_by_project.creation_time_date
-      Project Name: parameters.project_name
       Region: parameters.region
-    row: 31
+      Project Name: parameters.project_name
+    row: 27
     col: 0
     width: 24
     height: 15
@@ -183,7 +199,7 @@
     row: 5
     col: 0
     width: 5
-    height: 11
+    height: 7
   - name: ''
     type: text
     title_text: ''
@@ -199,7 +215,7 @@
     title_text: " (Copy)"
     body_text: '[{"type":"h1","children":[{"text":"Big Query Information"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 16
+    row: 12
     col: 0
     width: 24
     height: 2
@@ -262,7 +278,7 @@
     fields: [jobs_by_project.total_gigabytes_processed]
     filters:
       parameters.project_name: ''
-      jobs_by_project.region: ''
+      parameters.region: ''
     limit: 500
     query_timezone: America/Los_Angeles
     custom_color_enabled: true
@@ -298,9 +314,9 @@
     series_types: {}
     listen:
       Region: parameters.region
-      Project Name: parameters.project_name
       Slug: jobs_by_project__labels.value
-    row: 21
+      Project Name: parameters.project_name
+    row: 17
     col: 0
     width: 6
     height: 2
@@ -312,7 +328,7 @@
     fields: [jobs_by_project.total_slots]
     filters:
       parameters.project_name: ''
-      jobs_by_project.region: ''
+      parameters.region: ''
     sorts: [jobs_by_project.total_slots desc 0]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -349,9 +365,9 @@
     series_types: {}
     listen:
       Region: parameters.region
-      Project Name: parameters.project_name
       Slug: jobs_by_project__labels.value
-    row: 18
+      Project Name: parameters.project_name
+    row: 14
     col: 0
     width: 6
     height: 3
@@ -363,7 +379,7 @@
     fields: [jobs_by_project.total_kilobytes_processed]
     filters:
       parameters.project_name: ''
-      jobs_by_project.region: ''
+      parameters.region: ''
     limit: 500
     query_timezone: America/Los_Angeles
     custom_color_enabled: true
@@ -399,9 +415,9 @@
     series_types: {}
     listen:
       Region: parameters.region
-      Project Name: parameters.project_name
       Slug: jobs_by_project__labels.value
-    row: 23
+      Project Name: parameters.project_name
+    row: 19
     col: 0
     width: 6
     height: 2
@@ -487,9 +503,9 @@
     defaults_version: 1
     listen:
       Region: parameters.region
-      Project Name: parameters.project_name
       Slug: jobs_by_project__labels.value
-    row: 18
+      Project Name: parameters.project_name
+    row: 14
     col: 6
     width: 18
     height: 13
@@ -498,7 +514,7 @@
     title_text: " (Copy 2)"
     body_text: '[{"type":"p","children":[{"text":"Source: "},{"type":"a","url":"https://github.com/sam-pitcher/bq_optimization_lookml","children":[{"text":"https://github.com/sam-pitcher/bq_optimization_lookml"}],"id":1679930361661},{"text":""}],"id":1679930341417,"align":"right"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 54
+    row: 52
     col: 0
     width: 24
     height: 2
@@ -546,9 +562,9 @@
     series_types: {}
     listen:
       Region: parameters.region
-      Project Name: parameters.project_name
       Slug: jobs_by_project__labels.value
-    row: 25
+      Project Name: parameters.project_name
+    row: 21
     col: 0
     width: 6
     height: 6
@@ -597,9 +613,9 @@
     color_application: undefined
     listen:
       Region: parameters.region
-      Project Name: parameters.project_name
       Slug: jobs_by_project__labels.value
-    row: 46
+      Project Name: parameters.project_name
+    row: 44
     col: 0
     width: 24
     height: 8
@@ -645,10 +661,10 @@
     title: Slug
     type: field_filter
     default_value: ''
-    allow_multiple_values: true
+    allow_multiple_values: false
     required: true
     ui_config:
-      type: tag_list
+      type: advanced
       display: popover
     model: system__activity
     explore: query_metrics
