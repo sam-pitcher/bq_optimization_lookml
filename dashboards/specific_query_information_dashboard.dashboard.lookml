@@ -134,7 +134,7 @@
       Slug: jobs_by_project__labels.value
       Created Time: jobs_by_project.creation_time_time
       Created Date: jobs_by_project.creation_time_date
-      Project Name: jobs_by_project.project_name
+      Project Name: parameters.project_name
       Region: parameters.region
     row: 31
     col: 0
@@ -261,7 +261,7 @@
     type: single_value
     fields: [jobs_by_project.total_gigabytes_processed]
     filters:
-      jobs_by_project.project_name: ''
+      parameters.project_name: ''
       jobs_by_project.region: ''
     limit: 500
     query_timezone: America/Los_Angeles
@@ -311,7 +311,7 @@
     type: single_value
     fields: [jobs_by_project.total_slots]
     filters:
-      jobs_by_project.project_name: ''
+      parameters.project_name: ''
       jobs_by_project.region: ''
     sorts: [jobs_by_project.total_slots desc 0]
     limit: 500
@@ -362,7 +362,7 @@
     type: single_value
     fields: [jobs_by_project.total_kilobytes_processed]
     filters:
-      jobs_by_project.project_name: ''
+      parameters.project_name: ''
       jobs_by_project.region: ''
     limit: 500
     query_timezone: America/Los_Angeles
