@@ -1,16 +1,16 @@
 view: jobs_timeline_by_project {
   derived_table: {
-    sql: SELECT * FROM `{{ _filters['jobs_timeline_by_project.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['jobs_timeline_by_project.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT ;;
+    sql: SELECT * FROM `{{ _filters['parameters.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['parameters.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT ;;
   }
 
-  filter: project_name {
-    type: string
-  }
+  # filter: project_name {
+  #   type: string
+  # }
 
-  filter: region {
-    type: string
-    suggestions: ["eu","us"]
-  }
+  # filter: region {
+  #   type: string
+  #   suggestions: ["eu","us"]
+  # }
 
   dimension_group: period_start {
     type: time

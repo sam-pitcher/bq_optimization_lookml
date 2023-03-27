@@ -1,17 +1,17 @@
 view: jobs_by_project {
   derived_table: {
-    sql: select * from `{{ _filters['jobs_by_project.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['jobs_by_project.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    sql: select * from `{{ _filters['parameters.project_name'] | sql_quote | replace: "'", "" }}`.`region-{{ _filters['parameters.region'] | sql_quote | replace: "'", "" }}`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
       ;;
   }
 
-  filter: project_name {
-    type: string
-  }
+  # filter: project_name {
+  #   type: string
+  # }
 
-  filter: region {
-    type: string
-    suggestions: ["eu","us"]
-  }
+  # filter: region {
+  #   type: string
+  #   suggestions: ["eu","us"]
+  # }
 
   dimension: job_id {
     primary_key: yes

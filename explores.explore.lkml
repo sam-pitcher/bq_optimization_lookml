@@ -6,8 +6,8 @@ explore: jobs_by_project {
   ${jobs_by_project.job_type} = 'QUERY' AND ${jobs_by_project.statement_type} <> 'SCRIPT' ;;
   always_filter: {
     filters: [
-      project_name: "",
-      region: "us"
+      parameters.project_name: "",
+      parameters.region: "us"
     ]
   }
   join: jobs_by_project__labels {
@@ -23,6 +23,7 @@ explore: jobs_by_project {
     sql_on: ${jobs_timeline_by_project.job_id} = ${jobs_by_project.job_id} ;;
     relationship: many_to_one
   }
+  join: parameters {}
 }
 
 explore: jobs_timeline_by_project {
@@ -30,28 +31,31 @@ explore: jobs_timeline_by_project {
   ${jobs_timeline_by_project.job_type} = 'QUERY' AND ${jobs_timeline_by_project.statement_type} <> 'SCRIPT' ;;
   always_filter: {
     filters: [
-      project_name: "",
-      region: "us"
+      parameters.project_name: "",
+      parameters.region: "us"
     ]
   }
+  join: parameters {}
 }
 
 explore: quantile_statistics {
   always_filter: {
     filters: [
       period_start_filter: "2023-01-01",
-      project_name: "",
-      region: "us"
+      parameters.project_name: "",
+      parameters.region: "us"
     ]
   }
+  join: parameters {}
 }
 
 explore: quantile_statistics_hourly {
   always_filter: {
     filters: [
       period_start_filter: "2023-01-01",
-      project_name: "",
-      region: "us"
+      parameters.project_name: "",
+      parameters.region: "us"
     ]
   }
+  join: parameters {}
 }
