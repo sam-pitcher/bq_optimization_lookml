@@ -29,6 +29,10 @@ explore: jobs_timeline_by_project {
       region: "us"
     ]
   }
+  join: jobs_by_project__labels {
+    sql: , UNNEST(labels) AS jobs_by_project__labels ;;
+    relationship: one_to_many
+  }
 }
 
 explore: quantile_statistics {
