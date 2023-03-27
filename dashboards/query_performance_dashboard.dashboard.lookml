@@ -98,8 +98,8 @@
       Slug: jobs_by_project__labels.value
       Created Time: jobs_by_project.creation_time_time
       Created Date: jobs_by_project.creation_time_date
-      Region: jobs_by_project.region
-      Project Name: jobs_by_project.project_name
+      Region: parameters.region
+      Project Name: parameters.project_name
     row: 23
     col: 0
     width: 24
@@ -141,8 +141,8 @@
       Slug: jobs_by_project__labels.value
       Created Time: jobs_by_project.creation_time_time
       Created Date: jobs_by_project.creation_time_date
-      Region: jobs_by_project.region
-      Project Name: jobs_by_project.project_name
+      Region: parameters.region
+      Project Name: parameters.project_name
     row: 30
     col: 0
     width: 24
@@ -235,7 +235,7 @@
     # model: bq_optimization
     explore: jobs_by_project
     listens_to_filters: []
-    field: jobs_by_project.region
+    field: parameters.region
   - name: Project Name
     title: Project Name
     type: field_filter
@@ -249,7 +249,7 @@
     # model: bq_optimization
     explore: jobs_by_project
     listens_to_filters: []
-    field: jobs_by_project.project_name
+    field: parameters.project_name
   - name: Created Date
     title: Created Date
     type: field_filter
