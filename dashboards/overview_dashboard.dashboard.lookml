@@ -13,7 +13,7 @@
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
     filters: {}
-    sorts: [jobs_timeline_by_project.job_count desc 0]
+    sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
@@ -293,7 +293,7 @@
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
     filters: {}
-    sorts: [jobs_timeline_by_project.job_count desc 0]
+    sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
