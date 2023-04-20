@@ -3,7 +3,7 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: voXRCjutz28r7ZkiqeAZsV
+  preferred_slug: DfX6gawDLsdQt0LvySqCU2
   elements:
   - title: Looker Most Run Queries
     name: Looker Most Run Queries
@@ -14,7 +14,6 @@
       query.id, query.link, query.model, query.view, history.query_run_count, history.average_runtime,
       history.max_runtime, history.min_runtime, history.first_query_date, history.most_recent_query_date,
       history.cache_result_query_count, history.database_result_query_count]
-    filters: {}
     sorts: [history.query_run_count desc 0]
     limit: 500
     column_limit: 50
@@ -68,22 +67,55 @@
       Looker User Email: user.email
       Model: query.model
       Results from Database: history.database_result_query_count
-    row: 3
+    row: 5
     col: 0
     width: 24
     height: 24
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Looker''s Most Run Queries"}],"align":"center"},{"type":"p","children":[{"text":""}],"id":1679502524584,"align":"center"},{"type":"p","id":1679502557477,"align":"center","children":[{"text":"Use
       this Dashboard to get the Query ID and then parse it to the "},{"text":"Query
       Performance Metrics","bold":true},{"text":" Dashboard."}]}]'
     rich_content_json: '{"format":"slate"}'
-    row: 0
+    row: 2
     col: 0
     width: 24
     height: 3
+  - title: Nav Bar
+    name: Nav Bar
+    model: bq_optimization
+    explore: nav_bar
+    type: single_value
+    fields: [nav_bar.nav_bar]
+    sorts: [nav_bar.nav_bar]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    defaults_version: 1
+    listen: {}
+    row: 0
+    col: 0
+    width: 24
+    height: 2
+  - name: " (2)"
+    type: text
+    title_text: ''
+    subtitle_text: ''
+    body_text: '[{"type":"p","children":[{"text":"Source: "},{"type":"a","url":"https://github.com/sam-pitcher/bq_optimization_lookml","children":[{"text":"https://github.com/sam-pitcher/bq_optimization_lookml"}],"id":1679930361661},{"text":""}],"align":"right","id":1681995455220}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 29
+    col: 0
+    width: 24
+    height: 2
   filters:
   - name: Created Time
     title: Created Time

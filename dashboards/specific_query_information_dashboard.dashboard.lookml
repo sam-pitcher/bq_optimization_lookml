@@ -3,7 +3,7 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: K6FRoyODCsxJ2x8dHhKsBa
+  preferred_slug: yfgdKxFFfz05Ov1daBMM3u
   elements:
   - title: Looker Query Job Stages
     name: Looker Query Job Stages
@@ -94,7 +94,7 @@
     hidden_pivots: {}
     listen:
       Slug: history.slug
-    row: 2
+    row: 4
     col: 5
     width: 19
     height: 10
@@ -110,7 +110,6 @@
       jobs_by_project__job_stages.write_ms_avg, jobs_by_project__job_stages.read_ms_avg,
       jobs_by_project__job_stages.records_read, jobs_by_project__job_stages.records_written,
       jobs_by_project__job_stages.shuffle_output_bytes]
-    filters: {}
     sorts: [jobs_by_project__labels.value, jobs_by_project__job_stages.name]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -152,7 +151,7 @@
       Slug: jobs_by_project__labels.value
       Region: parameters.region
       Project Name: parameters.project_name
-    row: 27
+    row: 29
     col: 0
     width: 24
     height: 15
@@ -196,7 +195,7 @@
     hidden_fields: [query.formatted_fields]
     listen:
       Slug: history.slug
-    row: 5
+    row: 7
     col: 0
     width: 5
     height: 7
@@ -206,7 +205,7 @@
     body_text: '[{"type":"h1","children":[{"text":"Enter the Slug of the Query that
       has run from Looker"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 0
+    row: 2
     col: 0
     width: 24
     height: 2
@@ -215,7 +214,7 @@
     title_text: " (Copy)"
     body_text: '[{"type":"h1","children":[{"text":"Big Query Information"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 12
+    row: 14
     col: 0
     width: 24
     height: 2
@@ -266,7 +265,7 @@
     series_types: {}
     listen:
       Slug: history.slug
-    row: 2
+    row: 4
     col: 0
     width: 5
     height: 3
@@ -276,110 +275,7 @@
     explore: jobs_by_project
     type: single_value
     fields: [jobs_by_project.total_gigabytes_processed]
-    filters:
-      parameters.project_name: ''
-      parameters.region: ''
-    limit: 500
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    show_view_names: false
-    show_row_numbers: true
-    transpose: false
-    truncate_text: true
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: white
-    limit_displayed_rows: false
-    header_text_alignment: left
-    header_font_size: '12'
-    rows_font_size: '12'
-    show_sql_query_menu_options: false
-    show_totals: true
-    show_row_totals: true
-    truncate_header: false
-    series_cell_visualizations:
-      jobs_by_project.total_kilobytes_processed:
-        is_active: false
-    hidden_pivots: {}
-    defaults_version: 1
-    series_types: {}
-    listen:
-      Region: parameters.region
-      Slug: jobs_by_project__labels.value
-      Project Name: parameters.project_name
-    row: 17
-    col: 0
-    width: 6
-    height: 2
-  - title: Total Slots
-    name: Total Slots
-    # model: sam-pitcher-playground
-    explore: jobs_by_project
-    type: single_value
-    fields: [jobs_by_project.total_slots]
-    filters:
-      parameters.project_name: ''
-      parameters.region: ''
-    sorts: [jobs_by_project.total_slots desc 0]
-    limit: 500
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    show_view_names: false
-    show_row_numbers: true
-    transpose: false
-    truncate_text: true
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: white
-    limit_displayed_rows: false
-    header_text_alignment: left
-    header_font_size: '12'
-    rows_font_size: '12'
-    show_sql_query_menu_options: false
-    show_totals: true
-    show_row_totals: true
-    truncate_header: false
-    series_cell_visualizations:
-      jobs_by_project.total_kilobytes_processed:
-        is_active: false
-    hidden_pivots: {}
-    defaults_version: 1
-    series_types: {}
-    listen:
-      Region: parameters.region
-      Slug: jobs_by_project__labels.value
-      Project Name: parameters.project_name
-    row: 14
-    col: 0
-    width: 6
-    height: 3
-  - title: KB Processed
-    name: KB Processed
-    # model: sam-pitcher-playground
-    explore: jobs_by_project
-    type: single_value
-    fields: [jobs_by_project.total_kilobytes_processed]
-    filters:
-      parameters.project_name: ''
-      parameters.region: ''
+    filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
     custom_color_enabled: true
@@ -421,13 +317,109 @@
     col: 0
     width: 6
     height: 2
+  - title: Total Slots
+    name: Total Slots
+    # model: sam-pitcher-playground
+    explore: jobs_by_project
+    type: single_value
+    fields: [jobs_by_project.total_slots]
+    filters: {}
+    sorts: [jobs_by_project.total_slots desc 0]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    series_cell_visualizations:
+      jobs_by_project.total_kilobytes_processed:
+        is_active: false
+    hidden_pivots: {}
+    defaults_version: 1
+    series_types: {}
+    listen:
+      Region: parameters.region
+      Slug: jobs_by_project__labels.value
+      Project Name: parameters.project_name
+    row: 16
+    col: 0
+    width: 6
+    height: 3
+  - title: KB Processed
+    name: KB Processed
+    # model: sam-pitcher-playground
+    explore: jobs_by_project
+    type: single_value
+    fields: [jobs_by_project.total_kilobytes_processed]
+    filters: {}
+    limit: 500
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    series_cell_visualizations:
+      jobs_by_project.total_kilobytes_processed:
+        is_active: false
+    hidden_pivots: {}
+    defaults_version: 1
+    series_types: {}
+    listen:
+      Region: parameters.region
+      Slug: jobs_by_project__labels.value
+      Project Name: parameters.project_name
+    row: 21
+    col: 0
+    width: 6
+    height: 2
   - title: Slots over Time
     name: Slots over Time
     # model: sam-pitcher-playground
     explore: jobs_by_project
     type: looker_area
     fields: [jobs_timeline_by_project.period_start_time, jobs_timeline_by_project.max_slots]
-    filters: {}
     sorts: [jobs_timeline_by_project.period_start_time]
     limit: 500
     column_limit: 50
@@ -505,7 +497,7 @@
       Region: parameters.region
       Slug: jobs_by_project__labels.value
       Project Name: parameters.project_name
-    row: 14
+    row: 16
     col: 6
     width: 18
     height: 13
@@ -526,7 +518,6 @@
     fields: [jobs_by_project.job_id, jobs_by_project.creation_time_time, jobs_by_project.start_time_time,
       jobs_by_project.end_time_time, jobs_by_project.user_email, jobs_by_project.job_type,
       jobs_by_project.priority, jobs_by_project.state, jobs_by_project.statement_type]
-    filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -564,7 +555,7 @@
       Region: parameters.region
       Slug: jobs_by_project__labels.value
       Project Name: parameters.project_name
-    row: 21
+    row: 23
     col: 0
     width: 6
     height: 6
@@ -574,7 +565,6 @@
     explore: jobs_by_project
     type: table
     fields: [jobs_by_project.query]
-    filters: {}
     sorts: [jobs_by_project.query]
     limit: 1
     query_timezone: America/Los_Angeles
@@ -619,13 +609,27 @@
     col: 0
     width: 24
     height: 8
-  - name: " (2)"
-    type: text
-    title_text: ''
-    subtitle_text: ''
-    body_text: '[{"type":"p","children":[{"text":"Source: "},{"type":"a","url":"https://github.com/sam-pitcher/bq_optimization_lookml","children":[{"text":"https://github.com/sam-pitcher/bq_optimization_lookml"}],"id":1679930361661},{"text":""}],"align":"right","id":1679930767423}]'
-    rich_content_json: '{"format":"slate"}'
-    row: 42
+  - title: Nav Bar
+    name: Nav Bar
+    model: bq_optimization
+    explore: nav_bar
+    type: single_value
+    fields: [nav_bar.nav_bar]
+    sorts: [nav_bar.nav_bar]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    defaults_version: 1
+    listen: {}
+    row: 0
     col: 0
     width: 24
     height: 2

@@ -3,7 +3,7 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: ceqi3zexySkeTUXs8Z6mIW
+  preferred_slug: 5jknspXN3iwWljL9Hv9Q16
   elements:
   - title: Time Series Job Count
     name: Time Series Job Count
@@ -12,7 +12,6 @@
     type: looker_area
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
-    filters: {}
     sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -52,7 +51,7 @@
       Region: parameters.region
       Project Name: parameters.project_name
       Timeframe: parameters.timeframe
-    row: 3
+    row: 5
     col: 0
     width: 12
     height: 8
@@ -65,7 +64,7 @@
       that the largest job is using. Total Slots is the Total Number of the slots
       summed for the Timeframe chosen."}],"id":1679932634454}]'
     rich_content_json: '{"format":"slate"}'
-    row: 0
+    row: 2
     col: 0
     width: 24
     height: 3
@@ -74,7 +73,7 @@
     title_text: " (Copy)"
     body_text: '[{"type":"h1","children":[{"text":"Percentile Overview"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 29
+    row: 31
     col: 0
     width: 24
     height: 2
@@ -85,7 +84,6 @@
     type: looker_grid
     fields: [jobs_timeline_by_project.period_start_from_parameter, jobs_timeline_by_project.job_count,
       jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.total_gigabytes_processed]
-    filters: {}
     sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -133,7 +131,7 @@
       Region: parameters.region
       Project Name: parameters.project_name
       Timeframe: parameters.timeframe
-    row: 19
+    row: 21
     col: 0
     width: 24
     height: 10
@@ -144,7 +142,6 @@
     type: looker_area
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
-    filters: {}
     sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -195,7 +192,7 @@
       Region: parameters.region
       Project Name: parameters.project_name
       Timeframe: parameters.timeframe
-    row: 11
+    row: 13
     col: 0
     width: 12
     height: 8
@@ -208,7 +205,6 @@
       quantile_statistics.percentile_70, quantile_statistics.percentile_90, quantile_statistics.percentile_93,
       quantile_statistics.percentile_94, quantile_statistics.percentile_95, quantile_statistics.percentile_96,
       quantile_statistics.percentile_97, quantile_statistics.percentile_98, quantile_statistics.percentile_99]
-    filters: {}
     sorts: [quantile_statistics.percentile_50]
     limit: 500
     query_timezone: UTC
@@ -218,7 +214,7 @@
       Period Start Time: quantile_statistics.period_start_filter
       Region: parameters.region
       Project Name: parameters.project_name
-    row: 31
+    row: 33
     col: 0
     width: 8
     height: 12
@@ -229,7 +225,6 @@
     type: looker_area
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
-    filters: {}
     sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -281,7 +276,7 @@
       Region: parameters.region
       Project Name: parameters.project_name
       Timeframe: parameters.timeframe
-    row: 11
+    row: 13
     col: 12
     width: 12
     height: 8
@@ -292,7 +287,6 @@
     type: looker_area
     fields: [jobs_timeline_by_project.job_count, jobs_timeline_by_project.total_gigabytes_processed,
       jobs_timeline_by_project.total_slots, jobs_timeline_by_project.max_slots, jobs_timeline_by_project.period_start_from_parameter]
-    filters: {}
     sorts: [jobs_timeline_by_project.period_start_from_parameter]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -336,7 +330,7 @@
       Region: parameters.region
       Project Name: parameters.project_name
       Timeframe: parameters.timeframe
-    row: 3
+    row: 5
     col: 12
     width: 12
     height: 8
@@ -349,7 +343,6 @@
       quantile_statistics.percentile_70, quantile_statistics.percentile_90, quantile_statistics.percentile_93,
       quantile_statistics.percentile_94, quantile_statistics.percentile_95, quantile_statistics.percentile_96,
       quantile_statistics.percentile_97, quantile_statistics.percentile_98, quantile_statistics.percentile_99]
-    filters: {}
     sorts: [quantile_statistics.timeframe]
     limit: 500
     query_timezone: UTC
@@ -375,10 +368,45 @@
       Region: parameters.region
       Project Name: parameters.project_name
       Timeframe: parameters.timeframe
-    row: 31
+    row: 33
     col: 8
     width: 16
     height: 12
+  - title: Nav Bar
+    name: Nav Bar
+    model: bq_optimization
+    explore: nav_bar
+    type: single_value
+    fields: [nav_bar.nav_bar]
+    sorts: [nav_bar.nav_bar]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    defaults_version: 1
+    show_view_names: false
+    listen: {}
+    row: 0
+    col: 0
+    width: 24
+    height: 2
+  - name: " (2)"
+    type: text
+    title_text: ''
+    subtitle_text: ''
+    body_text: '[{"type":"p","children":[{"text":"Source: "},{"type":"a","url":"https://github.com/sam-pitcher/bq_optimization_lookml","children":[{"text":"https://github.com/sam-pitcher/bq_optimization_lookml"}],"id":1679930361661},{"text":""}],"align":"right","id":1681995286069}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 45
+    col: 0
+    width: 24
+    height: 2
   filters:
   - name: Region
     title: Region

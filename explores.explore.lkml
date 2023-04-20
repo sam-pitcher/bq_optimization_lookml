@@ -59,3 +59,8 @@ explore: quantile_statistics {
 #   }
 #   join: parameters {}
 # }
+
+######
+# nav bar
+include: "nav_bar.view"
+explore: nav_bar {hidden:no}

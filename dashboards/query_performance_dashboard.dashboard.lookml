@@ -3,7 +3,7 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: byqjsPBxwEPRJkoLWeYaUQ
+  preferred_slug: AzczQusYSocO0x2y6k0DHq
   elements:
   - title: Query Performance Metrics
     name: Query Performance Metrics
@@ -25,7 +25,6 @@
       query_metrics.pdt, query_metrics.cache_load, query_metrics.stream_to_cache,
       query_metrics.async_processing, query_metrics.queued, query_metrics.per_user_throttler,
       history.slug]
-    filters: {}
     sorts: [history.completed_time desc]
     column_limit: 50
     show_view_names: false
@@ -53,20 +52,19 @@
       Model: query.model
       Explore: query.view
       Looker User Email: user.email
-    row: 16
+    row: 18
     col: 0
     width: 24
     height: 5
   - title: BQ Query Performance Metrics
     name: BQ Query Performance Metrics
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: jobs_by_project
     type: looker_grid
     fields: [jobs_by_project.creation_time_date, jobs_by_project.creation_time_time,
       jobs_by_project__labels.value, jobs_by_project.job_id, jobs_by_project.job_type,
       jobs_by_project.total_kilobytes_processed, jobs_by_project.total_megabytes_processed,
       jobs_by_project.max_slots, jobs_by_project.total_slots, jobs_by_project.total_slot_ms]
-    filters: {}
     sorts: [jobs_by_project__labels.value]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -100,13 +98,13 @@
       Created Date: jobs_by_project.creation_time_date
       Region: parameters.region
       Project Name: parameters.project_name
-    row: 23
+    row: 25
     col: 0
     width: 24
     height: 7
   - title: BQ Query Job Stages
     name: BQ Query Job Stages
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: jobs_by_project
     type: looker_grid
     fields: [jobs_by_project.creation_time_date, jobs_by_project.creation_time_time,
@@ -116,7 +114,6 @@
       jobs_by_project__job_stages.write_ms_avg, jobs_by_project__job_stages.read_ms_avg,
       jobs_by_project__job_stages.records_read, jobs_by_project__job_stages.records_written,
       jobs_by_project__job_stages.shuffle_output_bytes]
-    filters: {}
     sorts: [jobs_by_project__labels.value, jobs_by_project__job_stages.name]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -143,7 +140,7 @@
       Created Date: jobs_by_project.creation_time_date
       Region: parameters.region
       Project Name: parameters.project_name
-    row: 30
+    row: 32
     col: 0
     width: 24
     height: 12
@@ -194,31 +191,67 @@
       Model: query.model
       Explore: query.view
       Looker User Email: user.email
-    row: 4
+    row: 6
     col: 0
     width: 24
     height: 12
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"See slowest queries"}],"align":"center"},{"type":"p","children":[{"text":""}],"id":1679500683737},{"type":"p","id":1679500710818,"children":[{"text":"Add
       the Slug of the queries to the filter at the top to see both the BigQuery and
       Looker metrics below."}],"align":"center"},{"type":"p","id":1679502446164,"align":"center","children":[{"text":"Can
       also get the Query ID from the "},{"text":"Looker Most Run Queries","bold":true},{"text":"
       dashboard."}]}]'
     rich_content_json: '{"format":"slate"}'
-    row: 0
+    row: 2
     col: 0
     width: 24
     height: 4
   - name: " (Copy)"
     type: text
     title_text: " (Copy)"
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Big Query Information"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 21
+    row: 23
+    col: 0
+    width: 24
+    height: 2
+  - name: " (2)"
+    type: text
+    title_text: ''
+    subtitle_text: ''
+    body_text: '[{"type":"p","children":[{"text":"Source: "},{"type":"a","url":"https://github.com/sam-pitcher/bq_optimization_lookml","children":[{"text":"https://github.com/sam-pitcher/bq_optimization_lookml"}],"id":1679930361661},{"text":""}],"align":"right","id":1681995322021}]'
+    rich_content_json: '{"format":"slate"}'
+    row: 44
+    col: 0
+    width: 24
+    height: 1
+  - title: Nav Bar
+    name: Nav Bar
+    model: bq_optimization
+    explore: nav_bar
+    type: single_value
+    fields: [nav_bar.nav_bar]
+    sorts: [nav_bar.nav_bar]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: '',
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    series_types: {}
+    defaults_version: 1
+    listen: {}
+    row: 0
     col: 0
     width: 24
     height: 2
@@ -232,7 +265,7 @@
     ui_config:
       type: button_toggles
       display: inline
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: jobs_by_project
     listens_to_filters: []
     field: parameters.region
@@ -246,7 +279,7 @@
       type: advanced
       display: popover
       options: []
-    # model: bq_optimization
+    # model: sam-pitcher-playground
     explore: jobs_by_project
     listens_to_filters: []
     field: parameters.project_name
