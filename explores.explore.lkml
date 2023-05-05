@@ -1,5 +1,17 @@
 include: "/jobs/*.view.lkml"
+include: "/queries/*.view.lkml"
 include: "/dashboards/*.dashboard"
+
+# QUERIES EXPLORE
+
+# utilization_metrics_summary
+explore: utilization_metrics_summary {
+  join: parameters {}
+}
+
+explore: ultilization_metrics_project_level {
+  join: parameters {}
+}
 
 explore: jobs_by_project {
   sql_always_where:
